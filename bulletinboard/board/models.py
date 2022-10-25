@@ -3,9 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
-from ckeditor.fields import RichTextField
-
-
+# Create your models here.
 class Post(models.Model):
     TYPE = (
         ('tank', 'Танки'),
@@ -19,19 +17,19 @@ class Post(models.Model):
         ('potionmakers', 'Зельевары'),
         ('spellmasters', 'Мастера заклинаний'),
     )
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=User)
-    title = models.CharField('Заголовок ', max_length=128)
+    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=128)
     text = RichTextUploadingField('Текст', blank=True, null=True)
     category = models.CharField(max_length=16, choices=TYPE, default='tank')
     announced = models.BooleanField(default=False)
-    header_image = models.FileField(null=True, blank=True, upload_to='images/')
-    сreation_date = models.DateTimeField('Дата публикации ', auto_now_add=True)
-
+    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    # upload = models.FileField(upload_to='uploads/')
 
 
 class Comment(models.Model):
     author = models.OneToOneField(User, on_delete=models.CASCADE)
     text = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     accepted = models.BooleanField(default=False)
 

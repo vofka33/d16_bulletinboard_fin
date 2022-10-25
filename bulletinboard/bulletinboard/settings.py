@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-rc9t1#31t3oj0%dz^$k5vnret7754g38tl*(c#yeulc6t+$o9x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -40,12 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-
-    'ckeditor',
     'ckeditor_uploader',
+    'ckeditor',
 
-    'board'
-
+    'board',
 
 ]
 
@@ -64,7 +63,7 @@ ROOT_URLCONF = 'bulletinboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -126,11 +125,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
+STATIC_ROOT = 'static/'
+
+# STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+
 
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
 # Default primary key field type
@@ -139,10 +142,6 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -178,7 +177,7 @@ CKEDITOR_CONFIGS = {
                 # put the name of your editor.ui.addButton here
                 'Preview',
                 'Maximize',
-
+                # 'html5video'
 
             ]},
         ],
@@ -205,7 +204,8 @@ CKEDITOR_CONFIGS = {
             'clipboard',
             'dialog',
             'dialogui',
-            'elementspath'
+            'elementspath',
+            # 'html5video'
 
 
         ]),
