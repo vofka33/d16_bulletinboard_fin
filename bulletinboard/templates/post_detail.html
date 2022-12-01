@@ -1,0 +1,84 @@
+{% extends 'default.html' %}
+
+{% block title %} {{ post.title }} {% endblock title %}
+
+{% block content %}
+
+<br>
+    <div class="card w-85">
+        <div class="card-header bg-dark bg-opacity-10">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                Автор публикации {{ post.author.username }} | опубликовано {{ post.creation_date }} | категория {{ post.category }}
+                </div>
+               <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                Комментариев {{ accepted_post_comments_count }} </div>
+               </div>
+        </div>
+        <div class="card-body">
+            <h1>{{ post.title }}</h1>
+            <p class="card-text2">{{ post.text|safe }}</p>
+        </div>
+        <div role="toolbar" aria-label="Toolbar with button groups">
+            {% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
+                    <div>
+                      <a class="btn btn-outline-secondary btn-sm" href="{% url 'post_edit' post.pk %}" role="button"> Редактировать</a>
+                      <a class="btn btn-outline-danger btn-sm" href="{% url 'post_delete' post.pk %}" role="button">Удалить</a>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+</br>
+<a class="btn btn-outline-primary btn-sm" href="{% url 'add_comment' post.pk %}" role="button">Добавить комментарий</a>
+</br>
+</br>
+
+
+{% if not post.comments.all %}
+    <h5>Комментариев пока нет</h5>
+{% else %}
+    <h5>Комментарии:</h5>
+{% endif %}
+</br>
+
+{% for comment in post_comments %}
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            {% if not comment.accepted %}
+                 <strong>Комментарий еще не принят {{ comment.creation_date }} {{ comment.author }}:</strong>
+                <br>
+                {{ comment.text }}
+                <br>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'comment_accept' pk=comment.pk %}" role="button">Принять<span class="glyphicon glyphicon-ok"></span></a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'comment_remove' pk=comment.pk %}" role="button">Удалить<span class="glyphicon glyphicon-remove"></span></a>
+            {% else %}
+                {{ comment.creation_date }} {{ comment.author }}:
+                <br>
+                {{ comment.text }}
+                <br>
+                <a class="btn btn-outline-secondary btn-sm" href="{% url 'comment_reject' pk=comment.pk %}" role="button">Отклонить<span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-outline-danger btn-sm" role="button" aria-disabled="true">Удалить<span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+            <br><br>
+        {% else %}
+            {% if comment.accepted %}
+                {{ comment.creation_date }} <strong>{{ comment.author }}:</strong>
+                <br>
+                {{ comment.text }}
+                <br><br>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if comment.accepted %}
+            {{ comment.creation_date }} <strong>{{ comment.author }}:</strong>
+            <br>
+            {{ comment.text }}
+             <br><br>
+        {% endif %}
+    {% endif %}
+{% endfor%}
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'default.html' %}
+
+{% block title %} Добавить комментарий {% endblock title %}
+
+{% block content %}
+<br>
+<div class="card w-85">
+    <div class="card-header bg-dark bg-opacity-10">
+        Заполняем все поля
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+             <!-- Теперь нам нужна только готовая форма и кнопка -->
+            <input type="submit" value="Добавить комментарий">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

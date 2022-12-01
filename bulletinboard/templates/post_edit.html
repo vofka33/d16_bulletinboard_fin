@@ -1,0 +1,29 @@
+{% extends 'default.html' %}
+
+{% block title %} Добавление/редактирование {% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+<br>
+<h3>Заполняем все поля</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" value="Добавить материалы">
+</form>
+
+    {% else %}
+    <br>
+    <h1>У вас нет доступа!</h1>
+
+    {% endif %}
+
+{% else %}
+
+У вас нет доступа!
+
+{% endif %}
+{% endblock content %}

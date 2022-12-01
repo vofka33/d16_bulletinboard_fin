@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.urls import reverse
 
-# Create your models here.
+
 class Post(models.Model):
     TYPE = (
         ('tank', 'Танки'),
@@ -17,19 +17,44 @@ class Post(models.Model):
         ('potionmakers', 'Зельевары'),
         ('spellmasters', 'Мастера заклинаний'),
     )
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=128)
-    text = RichTextUploadingField('Текст', blank=True, null=True)
-    category = models.CharField(max_length=16, choices=TYPE, default='tank')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=User, verbose_name="Автор")
+    title = models.CharField(max_length=128, verbose_name="Заголовок объявления")
+    text = RichTextUploadingField( blank=True, null=True, verbose_name="Текст объявления")
+    category = models.CharField(max_length=16, choices=TYPE, default='tank', verbose_name="Категория")
     announced = models.BooleanField(default=False)
-    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    # upload = models.FileField(upload_to='uploads/')
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def get_absolute_url(self):
+        return reverse("post_detail", args=(str(self.id)))
+
+    def announce(self):
+        self.announced = True
+        self.save()
 
 
 class Comment(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
-    text = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=User, verbose_name="Автор комментария")
+    text = models.TextField(verbose_name="Текст комментария")
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.post.title}'
+
+    def accept(self):
+        self.accepted = True
+        self.save()
+
+    def reject(self):
+        self.accepted = False
+        self.save()
+
+    def get_absolute_url(self):
+        return f'http://127.0.0.1:8000/{self.post.id}'
+
+
 

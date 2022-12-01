@@ -1,0 +1,78 @@
+{% extends 'default.html' %}
+{% block content%}
+
+<br>
+{% if user.is_authenticated %}
+        <h1>Публикации {{ user.username }}</h1>
+        <br/>
+
+    <form method="GET">
+        {{ filter.form.as_p }}
+        <input type="submit" value="Поиск" class="btn btn-secondary" role="button">
+        </form>
+    <br/><br/>
+        {% for post in filter.qs %}
+           <div class="card w-85">
+            <div class="card-header bg-dark bg-opacity-10">
+                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                    Автор публикации {{ post.author.username }} | опубликовано {{ post.creation_date }} | категория {{ post.category }}
+                    </div>
+                   <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                    Комментариев {{ post.comments.count }} </div>
+                    </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                  <a href="{% url 'post_detail' post.pk %}" class="text-dark">{{ post.title }}</a>            </h5>
+                <p class="card-text2">{{ post.text|safe|truncatechars:360 }}</p>
+            </div>
+            <div>
+                <div role="toolbar" aria-label="Toolbar with button groups">
+                    <div role="group" aria-label="First group">
+                                </div>
+                    {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                            <div>
+                              <a class="btn btn-outline-secondary btn-sm" href="{% url 'post_edit' post.pk %}" role="button"> Редактировать</a>
+                              <a class="btn btn-outline-danger btn-sm" href="{% url 'post_delete' post.pk %}" role="button">Удалить</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}            </div>
+            </div>
+        </div>
+            <div class="card-body">
+                <p class="card-text"></p>
+                {% if not post.comments.all %}
+                    Нет комментариев
+                {% else %}
+                   {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                            {% for comment in post.comments.all %}
+                                {% if not comment.accepted %}
+                                    <strong>{{ comment.creation_date }} {{ comment.author }}:</strong>
+                                    <br>
+                                    {{ comment.text }}
+                                    <br>
+                                    <a class="btn btn-outline-primary btn-sm" href="{% url 'comment_accept' pk=comment.pk %}" role="button">Принять<span class="glyphicon glyphicon-ok"></span></a>
+                                    <a class="btn btn-outline-danger btn-sm" href="{% url 'comment_remove' pk=comment.pk %}" role="button">Удалить<span class="glyphicon glyphicon-remove"></span></a>
+                                {% else %}
+                                    {{ comment.creation_date }} {{ comment.author }}:
+                                    <br>
+                                    {{ comment.text }}
+                                    <br>
+                                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'comment_reject' pk=comment.pk %}" role="button">Отклонить<span class="glyphicon glyphicon-remove"></span></a>
+                                    <a class="btn btn-outline-danger btn-sm" role="button" aria-disabled="true">Удалить<span class="glyphicon glyphicon-remove"></span></a>
+                                {% endif %}                               <br/><br/>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    </br></br>
+        {% endfor %}
+
+{% endif %}
+{% endblock %}

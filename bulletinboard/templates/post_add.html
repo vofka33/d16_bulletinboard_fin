@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+
+{% block title %} Добавление/редактирование {% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br>
+<div class="card w-85">
+    <div class="card-header bg-dark bg-opacity-10">
+        Заполняем все поля
+    </div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" value="Добавить материалы">
+        </form>
+    </div>
+</div>
+
+
+{% else %}
+
+У вас нет доступа!
+
+{% endif %}
+{% endblock content %}

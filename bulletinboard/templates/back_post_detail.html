@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+
+{% block title %}  Детали {% endblock title %}
+
+{% block content %}
+<h1> {{ post.title }} </h1>
+<div style="text-align: left">{{ post.text | safe }}</div>
+<br>
+<table align="right">
+  <tbody>
+    <tr>
+      <td scope="row">{{ post.author.authorUser }}</td>
+      <td>{{ post.creation_date | date:'d M Y' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+{% endblock content %}

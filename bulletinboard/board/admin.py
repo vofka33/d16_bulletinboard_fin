@@ -10,5 +10,17 @@ class PostAdminForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
-admin.site.register(Post)
-admin.site.register(Comment)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'title', 'creation_date', 'category', 'author')
+    list_filter = ('title', 'creation_date', 'category', 'author')
+    search_fields = ('title', 'creation_date', 'category', 'author')
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'creation_date', 'accepted', 'author', 'post')
+    list_filter = ('creation_date', 'accepted', 'author')
+    search_fields = ('creation_date', 'accepted', 'author')
+
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,8 +30,37 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
-# Application definition
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_FORMS = {'signup': 'board.forms.BasicSignupForm'}
+
+EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
+EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_TIMEOUT = 30
+
+load_dotenv()
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+
+LOGIN_URL = '/accounts/login/'
+# LOGIN_URL = '/sign/login/'
+LOGIN_REDIRECT_URL = '/'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,11 +71,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'django_filters',
+
     'ckeditor_uploader',
     'ckeditor',
 
-    'board',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.yandex',
 
+    'board.apps.BoardConfig',
+    'sign',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +113,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'bulletinboard.wsgi.application'
 
@@ -125,7 +164,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static/'
+# STATIC_ROOT = 'static/'
+
+STATICFILES_DIRS = [ BASE_DIR / "static" ]
+
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# STATICFILES = [STATIC_DIR]
 
 # STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
 
@@ -178,6 +222,7 @@ CKEDITOR_CONFIGS = {
                 'Preview',
                 'Maximize',
                 # 'html5video'
+                # 'youtube'
 
             ]},
         ],
@@ -206,6 +251,7 @@ CKEDITOR_CONFIGS = {
             'dialogui',
             'elementspath',
             # 'html5video'
+            # 'youtube'
 
 
         ]),

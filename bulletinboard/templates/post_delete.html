@@ -1,0 +1,31 @@
+{% extends 'default.html' %}
+
+{% block title %} Удалить пост? {% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        </br></br>
+        <h3>Удалить публикацию: {{ post.title }}?</h3><br/>
+        Созданную: {{ post.creation_date }} <strong>{{ post.author }}:</strong>
+
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <strong>Вы уверены?!</strong><br/><br/>
+                <button class="btn btn-primary btn-sm">Удалить публикацию!</button>
+        </div>
+
+    {% else %}
+
+    У вас нет доступа!
+
+    {% endif %}
+
+{% else %}
+
+У вас нет доступа!
+
+{% endif %}
+
+{% endblock content %}

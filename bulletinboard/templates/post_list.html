@@ -1,0 +1,66 @@
+<link href="../static/css/styles.css" rel="stylesheet" type="text/css">
+{% extends 'default.html' %}
+
+{% block title %} Все объявления {% endblock title %}
+
+{% block content %}
+
+<br>
+{% for post in object_list %}
+    <div class="card w-85">
+        <div class="card-header bg-dark bg-opacity-10">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                Автор публикации {{ post.author.username }} | опубликовано {{ post.creation_date }} | категория {{ post.category }}
+                </div>
+                {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                        <div>
+                          <a class="btn btn-outline-secondary btn-sm" href="{% url 'post_edit' post.pk %}" role="button"> Редактировать</a>
+                          <a class="btn btn-outline-danger btn-sm" href="{% url 'post_delete' post.pk %}" role="button">Удалить</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'post_detail' post.pk %}" class="text-dark">{{ post.title }}</a>            </h5>
+            <p class="card-text2">{{ post.text|safe|truncatechars:360 }}</p>
+        </div>
+    </div>
+<br/><br/>
+{% endfor %}
+
+{% if is_paginated %}
+
+<div class="card w-85">
+        <div class="card-header bg-dark bg-opacity-10">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+
+
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">Первая</a>
+                        <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <a>{{ num }}</a>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <a href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}"  >>>></a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+<br>
+
+{% endblock content %}
