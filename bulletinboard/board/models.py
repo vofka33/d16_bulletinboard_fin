@@ -21,18 +21,14 @@ class Post(models.Model):
     title = models.CharField(max_length=128, verbose_name="Заголовок объявления")
     text = RichTextUploadingField( blank=True, null=True, verbose_name="Текст объявления")
     category = models.CharField(max_length=16, choices=TYPE, default='tank', verbose_name="Категория")
-    announced = models.BooleanField(default=False)
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
 
     def __str__(self):
         return f'{self.title}'
 
     def get_absolute_url(self):
-        return reverse("post_detail", args=(str(self.id)))
+        return f'http://127.0.0.1:8000/{self.id}'
 
-    def announce(self):
-        self.announced = True
-        self.save()
 
 
 class Comment(models.Model):

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новинки на Bulletinboard</title>
+</head>
+<body>
+    <h3>Добрый день!</h3>
+    <h3>Новинки на Bulletinboard.</h3>
+    <hr>
+    <br>
+    {% if digest %}
+    <h3>Новые публикации:</h3>
+    <br/>
+        <table>
+        {% for post in digest %}
+            <tr>
+                <td>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }} </a>
+                </td>
+                <td>
+                    {{ post.text|truncatechars:50|safe }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>За неделю не было новых публикаций.</h2>
+    {% endif %}
+<br>
+<hr>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

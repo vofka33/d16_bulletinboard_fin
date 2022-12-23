@@ -13,7 +13,17 @@
                 <div class="btn-group btn-group-sm" role="group" aria-label="First group">
                 Автор публикации {{ post.author.username }} | опубликовано {{ post.creation_date }} | категория {{ post.category }}
                 </div>
-                {% if user.is_authenticated %}
+
+                </div>
+
+
+        </div>
+        <div class="card-body">
+            <h5>
+              <a href="{% url 'post_detail' post.pk %}" class="text-dark">{{ post.title }}</a>            </h5>
+            <p class="card-text2">{{ post.text|safe|truncatechars:360 }}</p>
+        </div>
+                       {% if user.is_authenticated %}
                     {% if user.id == post.author.id %}
                         <div>
                           <a class="btn btn-outline-secondary btn-sm" href="{% url 'post_edit' post.pk %}" role="button"> Редактировать</a>
@@ -21,13 +31,6 @@
                         </div>
                     {% endif %}
                 {% endif %}
-
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">
-              <a href="{% url 'post_detail' post.pk %}" class="text-dark">{{ post.title }}</a>            </h5>
-            <p class="card-text2">{{ post.text|safe|truncatechars:360 }}</p>
-        </div>
     </div>
 <br/><br/>
 {% endfor %}

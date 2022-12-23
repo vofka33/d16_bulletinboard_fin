@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
@@ -7,8 +6,6 @@ from .filters import PostFilter
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
 
 
 

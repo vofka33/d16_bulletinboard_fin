@@ -39,15 +39,14 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
-# ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_FORMS = {'signup': 'board.forms.BasicSignupForm'}
 
-EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один и тот же
-EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_TIMEOUT = 30
 
 load_dotenv()
@@ -58,7 +57,6 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 
 LOGIN_URL = '/accounts/login/'
-# LOGIN_URL = '/sign/login/'
 LOGIN_REDIRECT_URL = '/'
 
 
@@ -79,7 +77,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
 
     'board.apps.BoardConfig',
@@ -153,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -164,15 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = 'static/'
-
-STATICFILES_DIRS = [ BASE_DIR / "static" ]
-
-# STATIC_DIR = os.path.join(BASE_DIR, 'static')
-# STATICFILES = [STATIC_DIR]
-
-# STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
@@ -236,7 +225,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',# the upload image feature
             # your extra plugins here
             'div',
             'autolink',
@@ -257,3 +246,13 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+
+CELERY_BROKER_URL = 'redis://default:redispw@localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://default:redispw@localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Moscow'
+
