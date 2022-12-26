@@ -1,81 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1bfa1f7-e8fd-4fcd-aa6c-9b27d4e160e1" name="Changes" comment="D16 with in process">
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/migrations/0002_alter_post_category.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/migrations/0003_alter_comment_author_alter_comment_text_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/migrations/0004_rename_сreation_date_comment_creation_date_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/migrations/0005_alter_comment_post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/migrations/0006_remove_post_announced.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/board/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/bulletinboard/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/images/Untitled-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/uploads/2022/10/25/duo-realis-jerkbait-100sp1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/uploads/2022/12/20/34_1_1539680554.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/uploads/2022/12/20/90a00880ea92ef509c7c0a18014a9b88.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/uploads/2022/12/23/untitled-1asdasd.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/media/uploads/2022/12/23/untitled-2fgfgd.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/sign/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/images/icon-hdpi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/images/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/ar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/bg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/cs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/de.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/el.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/en.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/es.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/et.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/eu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/fi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/fr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/he.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/hu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/it.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/ja.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/ko.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/nb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/nl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/nn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/pl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/pt-br.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/pt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/ru.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/sk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/tr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/uk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/vi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/lang/zh.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/ckeditor/ckeditor/plugins/youtube/plugin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/static/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/templates/account/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/templates/account/signup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/templates/sign/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/templates/sign/logout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulletinboard/templates/weekly_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="d1bfa1f7-e8fd-4fcd-aa6c-9b27d4e160e1" name="Changes" comment="D16 bulletinboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/board/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/board/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/board/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/board/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/board/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/board/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/bulletinboard/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/bulletinboard/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/bulletinboard/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/bulletinboard/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/back_post_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/comment_created.html" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/templates/comment_created.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/templates/default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/templates/post_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/bulletinboard/templates/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bulletinboard/templates/user_update.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
